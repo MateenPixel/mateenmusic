@@ -39,6 +39,7 @@ document.addEventListener("DOMContentLoaded", function() {
         scale: 1.00,
         scaleMobile: 1.00
     });
+    
 });
 
 async function fetchRecentlyPlayedTracks(token) {
