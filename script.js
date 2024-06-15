@@ -91,7 +91,7 @@ const vercelUrl = 'https://mateenmusic.vercel.app/'; // Your Vercel app URL
 // Spotify Implicit Grant Flow
 function authenticate() {
     const scopes = 'user-read-recently-played';
-    const url = `${vercelUrl}/login`;
+    const url = `${vercelUrl}/login`; // Ensure this matches the endpoint in your Vercel deployment
     window.location.href = url;
 }
 
