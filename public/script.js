@@ -2,9 +2,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const ul = document.querySelector("nav ul");
     const artists = ["Graduation by Kanye West", "Link 2", "Link 3", "Link 4", "Link 5", "Link 6", "Link 7", "Link 8", "Link 9", "Link 10", "Link 11", "Link 12", "Link 13"];
     const headerTitle = document.querySelector(".header-title");
-    const recentlyListenedModal = document.getElementById('modal');
-    const aboutMeModal = document.getElementById('about-me-modal');
-    const closeButtons = document.getElementsByClassName('close'); // Correctly define closeButtons
 
     function populateList() {
         ul.innerHTML = '';
@@ -45,7 +42,6 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 async function fetchRecentlyPlayedTracks(token) {
-    console.log('Fetching recently played tracks with token:', token);
     const apiUrl = 'https://api.spotify.com/v1/me/player/recently-played?limit=5';
     const response = await fetch(apiUrl, {
         headers: {
@@ -79,20 +75,14 @@ function displayRecentlyPlayed(tracks) {
 }
 
 document.getElementById('recently-listened-tab').addEventListener('click', () => {
-    console.log('Recently listened tab clicked');
     const params = new URLSearchParams(window.location.hash.substring(1));
     const token = params.get('access_token');
     if (token) {
-        console.log('Access token found:', token);
         fetchRecentlyPlayedTracks(token).then(tracks => {
-            console.log('Tracks fetched:', tracks);
             displayRecentlyPlayed(tracks);
             recentlyListenedModal.style.display = 'block';
-        }).catch(error => {
-            console.error('Error fetching tracks:', error);
         });
     } else {
-        console.log('No access token found, initiating authentication');
         authenticate();
     }
 });
@@ -133,6 +123,5 @@ const vercelUrl = 'https://mateenmusic.vercel.app';
 function authenticate() {
     const scopes = 'user-read-recently-played';
     const url = `${vercelUrl}/login`;
-    console.log('Redirecting to Spotify for authentication:', url);
     window.location.href = url;
 }
