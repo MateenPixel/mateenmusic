@@ -15,13 +15,14 @@ app.use(cors());
 
 app.get('/login', (req, res) => {
     const scopes = 'user-read-recently-played';
-    res.redirect('https://accounts.spotify.com/authorize?' +
-        querystring.stringify({
-            response_type: 'token',
-            client_id: clientId,
-            scope: scopes,
-            redirect_uri: redirectUri
-        }));
+    const url = 'https://accounts.spotify.com/authorize?' + querystring.stringify({
+        response_type: 'token',
+        client_id: clientId,
+        scope: scopes,
+        redirect_uri: redirectUri
+    });
+    console.log('Redirecting to Spotify:', url);
+    res.redirect(url);
 });
 
 app.get('/callback', (req, res) => {
