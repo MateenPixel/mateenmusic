@@ -6,7 +6,7 @@ const request = require('request');
 const cors = require('cors');
 const querystring = require('querystring');
 const app = express();
-const port = process.env.PORT || 8888;
+const port = process.env.PORT || 3001; // Changed port to 3001 for local development
 
 const clientId = process.env.CLIENT_ID;
 const clientSecret = process.env.CLIENT_SECRET;
