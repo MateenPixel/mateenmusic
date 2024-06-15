@@ -5,9 +5,9 @@ const querystring = require('querystring');
 const app = express();
 const port = process.env.PORT || 8888;
 
-const clientId = 'b18acce7865b488782b0a404a6848e98';
-const clientSecret = '9fd1bccc55fc402986159b6fb3dd0560';
-const redirectUri = 'https://mateenpixel.github.io/mateenmusic/callback';
+const clientId = process.env.CLIENT_ID;
+const clientSecret = process.env.CLIENT_SECRET;
+const redirectUri = 'https://mateenpixel.github.io/mateenmusic';
 
 app.use(cors());
 
@@ -15,7 +15,7 @@ app.get('/login', (req, res) => {
     const scopes = 'user-read-recently-played';
     res.redirect('https://accounts.spotify.com/authorize?' +
         querystring.stringify({
-            response_type: 'code',
+            response_type: 'token',
             client_id: clientId,
             scope: scopes,
             redirect_uri: redirectUri
@@ -42,7 +42,7 @@ app.get('/callback', (req, res) => {
             const access_token = body.access_token;
             const refresh_token = body.refresh_token;
 
-            res.redirect(`https://mateenpixel.github.io/mateenmusic/#${querystring.stringify({
+            res.redirect(`${redirectUri}/#${querystring.stringify({
                 access_token: access_token,
                 refresh_token: refresh_token
             })}`);

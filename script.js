@@ -84,13 +84,14 @@ document.getElementById('recently-listened-tab').addEventListener('click', async
     }
 });
 
-const clientId = 'b18acce7865b488782b0a404a6848e98';
+const clientId = 'b18acce7865b488782b0a404a6848e98'; // Make sure this is a string
 const redirectUri = 'https://mateenpixel.github.io/mateenmusic';
+const vercelUrl = 'https://mateenmusic.vercel.app/'; // Your Vercel app URL
 
 // Spotify Implicit Grant Flow
 function authenticate() {
     const scopes = 'user-read-recently-played';
-    const url = `https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&scope=${encodeURIComponent(scopes)}&redirect_uri=${encodeURIComponent(redirectUri)}`;
+    const url = `${vercelUrl}/login`;
     window.location.href = url;
 }
 
@@ -139,6 +140,16 @@ document.getElementById('recently-listened-tab').addEventListener('click', () =>
     } else {
         authenticate();
     }
+});
+
+// Ensure other tabs clear the hash and hide the modal
+document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+        if (tab.id !== 'recently-listened-tab') {
+            window.location.hash = '';
+            modal.style.display = 'none';
+        }
+    });
 });
 
 span.onclick = function() {
