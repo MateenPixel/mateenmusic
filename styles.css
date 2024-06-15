@@ -260,29 +260,19 @@ nav ul li:hover {
     color: #ccc;
 }
 
-.track-buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-}
-
-.track-buttons button,
-.track-buttons a {
+.track a {
     background: #1db954;
     color: #fff;
     border: none;
     padding: 8px 12px;
-    margin: 5px 0;
     text-decoration: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background 0.3s ease;
-    width: 150px;
-    text-align: center;
+    margin-left: 20px;
 }
 
-.track-buttons button:hover,
-.track-buttons a:hover {
+.track a:hover {
     background: #1ed760;
 }
 

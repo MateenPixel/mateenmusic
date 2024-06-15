@@ -66,14 +66,12 @@ function displayRecentlyPlayed(tracks) {
                 <h3>${track.name}</h3>
                 <p>${track.artists.map(artist => artist.name).join(', ')}</p>
             </div>
-            <div class="track-buttons">
-                <button onclick="shareTrack('${track.external_urls.spotify}', '${track.name}', '${track.artists.map(artist => artist.name).join(', ')}')">Share</button>
-                <a href="${track.external_urls.spotify}" target="_blank">Open in Spotify</a>
-            </div>
+            <a href="${track.external_urls.spotify}" target="_blank">Open in Spotify</a>
         `;
         container.appendChild(trackElement);
     });
 }
+
 
 
 function shareTrack(url, name, artists) {
