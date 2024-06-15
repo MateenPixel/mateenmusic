@@ -9,7 +9,7 @@ const port = process.env.PORT || 3001;
 
 const clientId = process.env.CLIENT_ID;
 const clientSecret = process.env.CLIENT_SECRET;
-const redirectUri = 'https://mateenpixel.github.io/mateenmusic/callback';
+const redirectUri = 'https://mateenpixel.github.io/mateenmusic/callback'; // Use GitHub Pages URI
 
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -58,7 +58,6 @@ app.get('/callback', (req, res) => {
     });
 });
 
-// Handle all other routes
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
