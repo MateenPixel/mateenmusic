@@ -84,14 +84,14 @@ document.getElementById('recently-listened-tab').addEventListener('click', async
     }
 });
 
-const clientId = 'b18acce7865b488782b0a404a6848e98'; // Ensure this is your actual client ID
-const redirectUri = 'https://mateenpixel.github.io/mateenmusic/'; // Ensure this matches your GitHub Pages URL
-const vercelUrl = 'https://mateenmusic.vercel.app/'; // Ensure this is your actual Vercel app URL
+const clientId = 'b18acce7865b488782b0a404a6848e98'; // Make sure this is a string
+const redirectUri = 'https://mateenpixel.github.io/mateenmusic';
+const vercelUrl = 'https://mateenmusic.vercel.app/'; // Your Vercel app URL
 
 // Spotify Implicit Grant Flow
 function authenticate() {
     const scopes = 'user-read-recently-played';
-    const url = `${vercelUrl}/login`; // Ensure this matches the endpoint in your Vercel deployment
+    const url = `${vercelUrl}/login`;
     window.location.href = url;
 }
 
@@ -120,24 +120,9 @@ function displayRecentlyPlayed(tracks) {
                 <h3>${track.name}</h3>
                 <p>${track.artists.map(artist => artist.name).join(', ')}</p>
             </div>
-            <div class="track-buttons">
-                <button onclick="shareTrack('${track.external_urls.spotify}', '${track.name}', '${track.artists.map(artist => artist.name).join(', ')}')">Share</button>
-                <a href="${track.external_urls.spotify}" target="_blank">Open in Spotify</a>
-            </div>
         `;
         container.appendChild(trackElement);
     });
-}
-
-function shareTrack(url, name, artists) {
-    if (navigator.share) {
-        navigator.share({
-            title: `Check out ${name} by ${artists}`,
-            url: url
-        }).catch(console.error);
-    } else {
-        alert('Sharing not supported in this browser. Here is the link: ' + url);
-    }
 }
 
 // Handle modal

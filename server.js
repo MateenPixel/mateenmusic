@@ -7,7 +7,7 @@ const port = process.env.PORT || 8888;
 
 const clientId = process.env.CLIENT_ID;
 const clientSecret = process.env.CLIENT_SECRET;
-const redirectUri = 'https://mateenpixel.github.io/mateenmusic/';
+const redirectUri = 'https://mateenpixel.github.io/mateenmusic';
 
 app.use(cors());
 
