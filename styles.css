@@ -206,11 +206,12 @@ nav ul li:hover {
 
 .modal-content {
     background-color: #0e0d0d;
-    margin: 15% auto;
+    margin: 5% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
     color: #e0e0e0;
+    text-align: center; /* Center the text */
 }
 
 .close {
@@ -225,4 +226,35 @@ nav ul li:hover {
     color: #000;
     text-decoration: none;
     cursor: pointer;
+}
+
+/* Styles for the recently listened tracks */
+.track {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    padding: 10px;
+    border-bottom: 1px solid #888;
+}
+
+.track img {
+    width: 50px; /* Smaller album cover */
+    height: 50px; /* Smaller album cover */
+    margin-right: 10px;
+}
+
+.track div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.track h3 {
+    margin: 0;
+    font-size: 1em; /* Smaller text */
+}
+
+.track p {
+    margin: 0;
+    font-size: 0.9em; /* Smaller text */
 }
