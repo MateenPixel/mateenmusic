@@ -228,33 +228,58 @@ nav ul li:hover {
     cursor: pointer;
 }
 
-/* Styles for the recently listened tracks */
 .track {
     display: flex;
     align-items: center;
-    margin: 10px 0;
+    justify-content: space-between;
+    margin-bottom: 20px;
     padding: 10px;
-    border-bottom: 1px solid #888;
+    border-bottom: 1px solid #444;
 }
 
 .track img {
-    width: 50px; /* Smaller album cover */
-    height: 50px; /* Smaller album cover */
-    margin-right: 10px;
+    width: 60px;
+    height: 60px;
+    border-radius: 5px;
+    margin-right: 15px;
 }
 
 .track div {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    flex: 1;
 }
 
 .track h3 {
     margin: 0;
-    font-size: 1em; /* Smaller text */
+    font-size: 1.1em;
+    color: #fff;
 }
 
 .track p {
     margin: 0;
-    font-size: 0.9em; /* Smaller text */
+    font-size: 0.9em;
+    color: #ccc;
+}
+
+.track-buttons {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 10px;
+}
+
+.track-buttons button,
+.track-buttons a {
+    background: #1db954;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    margin-right: 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.track-buttons button:hover,
+.track-buttons a:hover {
+    background: #1ed760;
 }

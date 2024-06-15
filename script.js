@@ -65,10 +65,10 @@ function displayRecentlyPlayed(tracks) {
             <div>
                 <h3>${track.name}</h3>
                 <p>${track.artists.map(artist => artist.name).join(', ')}</p>
-            </div>
-            <div class="track-buttons">
-                <button onclick="shareTrack('${track.external_urls.spotify}', '${track.name}', '${track.artists.map(artist => artist.name).join(', ')}')">Share</button>
-                <a href="${track.external_urls.spotify}" target="_blank">Open in Spotify</a>
+                <div class="track-buttons">
+                    <button onclick="shareTrack('${track.external_urls.spotify}', '${track.name}', '${track.artists.map(artist => artist.name).join(', ')}')">Share</button>
+                    <a href="${track.external_urls.spotify}" target="_blank">Open in Spotify</a>
+                </div>
             </div>
         `;
         container.appendChild(trackElement);
@@ -122,7 +122,7 @@ window.onclick = function(event) {
     }
 }
 
-const clientId = 'b18acce7865b488782b0a404a6848e98'; // Make sure this is a string
+const clientId = 'your-client-id'; // Make sure this is a string
 const redirectUri = 'https://mateenpixel.github.io/mateenmusic/';
 const vercelUrl = 'https://mateenmusic.vercel.app/';
 
@@ -131,4 +131,3 @@ function authenticate() {
     const url = `${vercelUrl}/login`;
     window.location.href = url;
 }
-
