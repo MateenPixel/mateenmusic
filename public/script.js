@@ -2,9 +2,9 @@ document.addEventListener("DOMContentLoaded", function() {
     const ul = document.querySelector("nav ul");
     const artists = ["Graduation by Kanye West", "Link 2", "Link 3", "Link 4", "Link 5", "Link 6", "Link 7", "Link 8", "Link 9", "Link 10", "Link 11", "Link 12", "Link 13"];
     const headerTitle = document.querySelector(".header-title");
-    const recentlyListenedModal = document.getElementById('modal');
+    const recentlyListenedModal = document.getElementById('recently-listened-modal'); // Ensure correct ID
     const aboutMeModal = document.getElementById('about-me-modal');
-    const closeButtons = document.getElementsByClassName('close'); // Correctly define closeButtons
+    const closeButtons = document.getElementsByClassName('close');
 
     function populateList() {
         ul.innerHTML = '';
@@ -115,7 +115,7 @@ document.getElementById('recently-listened-tab').addEventListener('click', () =>
         fetchRecentlyPlayedTracks(token).then(tracks => {
             console.log('Tracks fetched:', tracks);
             displayRecentlyPlayed(tracks);
-            recentlyListenedModal.style.display = 'block';
+            recentlyListenedModal.style.display = 'block'; // Ensure modal is shown
         }).catch(error => {
             console.error('Error fetching tracks:', error);
         });
