@@ -22,11 +22,13 @@ app.get('/login', (req, res) => {
         scope: scopes,
         redirect_uri: redirectUri
     });
+    console.log('Redirecting to:', url); // Log the redirect URL
     res.redirect(url);
 });
 
 app.get('/callback', (req, res) => {
     const code = req.query.code || null;
+    console.log('Authorization code received:', code);
     const authOptions = {
         url: 'https://accounts.spotify.com/api/token',
         form: {
@@ -42,11 +44,14 @@ app.get('/callback', (req, res) => {
 
     request.post(authOptions, (error, response, body) => {
         if (error || response.statusCode !== 200) {
+            console.error('Error getting tokens:', error || body);
             return res.redirect('/#' + querystring.stringify({ error: 'invalid_token' }));
         }
 
         const access_token = body.access_token;
         const refresh_token = body.refresh_token;
+        console.log('Access token received:', access_token);
+        console.log('Refresh token received:', refresh_token);
         res.redirect(`https://mateenpixel.github.io/mateenmusic/#${querystring.stringify({
             access_token: access_token,
             refresh_token: refresh_token
