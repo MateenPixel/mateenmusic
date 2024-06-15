@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const headerTitle = document.querySelector(".header-title");
     const recentlyListenedModal = document.getElementById('modal');
     const aboutMeModal = document.getElementById('about-me-modal');
-    const closeButtons = document.getElementsByClassName('close');
+    const closeButtons = document.getElementsByClassName('close'); // Correctly define closeButtons
 
     function populateList() {
         ul.innerHTML = '';
