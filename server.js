@@ -12,9 +12,10 @@ const port = process.env.PORT || 3001; // Change the port for local development
 console.log('CLIENT_ID:', process.env.CLIENT_ID);
 console.log('CLIENT_SECRET:', process.env.CLIENT_SECRET);
 
-const clientId = process.env.CLIENT_ID;
-const clientSecret = process.env.CLIENT_SECRET;
+const clientId = 'b18acce7865b488782b0a404a6848e98'; // Hardcoded for debugging
+const clientSecret = process.env.CLIENT_SECRET; // Still use environment variable for client secret
 const redirectUri = 'https://mateenmusic.vercel.app/callback';
+
 
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
