@@ -74,22 +74,6 @@ function displayRecentlyPlayed(tracks) {
     });
 }
 
-function shareTrack(url, name, artists) {
-    if (navigator.share) {
-        navigator.share({
-            title: `Check out ${name} by ${artists}`,
-            url: url
-        }).catch(console.error);
-    } else {
-        alert('Sharing not supported in this browser. Here is the link: ' + url);
-    }
-}
-
-// Handle modals
-const recentlyListenedModal = document.getElementById('modal');
-const aboutMeModal = document.getElementById('about-me-modal');
-const closeButtons = document.getElementsByClassName('close');
-
 document.getElementById('recently-listened-tab').addEventListener('click', () => {
     const params = new URLSearchParams(window.location.hash.substring(1));
     const token = params.get('access_token');
@@ -133,9 +117,8 @@ window.onclick = function(event) {
     }
 }
 
-const clientId = 'b18acce7865b488782b0a404a6848e98'; // Make sure this is a string
-const redirectUri = 'https://mateenpixel.github.io/mateenmusic/';
-const vercelUrl = 'https://mateenmusic.vercel.app/';
+const clientId = 'b18acce7865b488782b0a404a6848e98';
+const vercelUrl = 'https://mateenmusic.vercel.app';
 
 function authenticate() {
     const scopes = 'user-read-recently-played';

@@ -1,21 +1,15 @@
-require('dotenv').config(); // Load environment variables from .env file
-
+require('dotenv').config();
 const path = require('path');
 const express = require('express');
 const request = require('request');
 const cors = require('cors');
 const querystring = require('querystring');
 const app = express();
-const port = process.env.PORT || 3001; // Change the port for local development
+const port = process.env.PORT || 3001;
 
-// Log the environment variables
-console.log('CLIENT_ID:', process.env.CLIENT_ID);
-console.log('CLIENT_SECRET:', process.env.CLIENT_SECRET);
-
-const clientId = 'b18acce7865b488782b0a404a6848e98'; // Hardcoded for debugging
-const clientSecret = process.env.CLIENT_SECRET; // Still use environment variable for client secret
-const redirectUri = 'https://mateenmusic.vercel.app/callback';
-
+const clientId = process.env.CLIENT_ID;
+const clientSecret = process.env.CLIENT_SECRET;
+const redirectUri = 'https://mateenpixel.github.io/mateenmusic/callback';
 
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -28,7 +22,6 @@ app.get('/login', (req, res) => {
         scope: scopes,
         redirect_uri: redirectUri
     });
-    console.log('Redirecting to:', url); // Log the redirect URL
     res.redirect(url);
 });
 
@@ -55,7 +48,7 @@ app.get('/callback', (req, res) => {
         if (response.statusCode === 200) {
             const access_token = body.access_token;
             const refresh_token = body.refresh_token;
-            res.redirect(`/#${querystring.stringify({
+            res.redirect(`https://mateenpixel.github.io/mateenmusic/#${querystring.stringify({
                 access_token: access_token,
                 refresh_token: refresh_token
             })}`);
