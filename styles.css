@@ -42,13 +42,11 @@ body {
     color: #c1c4e7;
     text-decoration: none;
     padding: 10px 20px;
-    transition: color 0.3s ease, transform 0.3s ease; /* Added transform transition */
-    cursor: pointer;
+    transition: color 0.3s ease;
 }
 
 .tab:hover {
     color: #ffffff; /* Change color on hover */
-    transform: scale(1.2); /* Scale on hover */
 }
 
 .main-content {
@@ -278,38 +276,3 @@ nav ul li:hover {
     background: #1ed760;
 }
 
-.track .track-buttons {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Add spacing between buttons */
-}
-
-.track button {
-    background: #1db954;
-    color: #fff;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.track button:hover {
-    background: #1ed760;
-}
-
-.track a {
-    background: #1db954;
-    color: #fff;
-    border: none;
-    padding: 8px 12px;
-    text-decoration: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    margin-left: 20px;
-}
-
-.track a:hover {
-    background: #1ed760;
-}

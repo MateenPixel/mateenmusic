@@ -1,17 +1,13 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const ul = document.querySelector("#album-list");
-    const artists = [
-        { name: "Graduation by Kanye West", link: "graduation.html" },
-        { name: "Link 2", link: "link2.html" },
-        { name: "Link 3", link: "link3.html" },
-        // Add more artists and links here
-    ];
+    const ul = document.querySelector("nav ul");
+    const artists = ["Graduation by Kanye West", "Link 2", "Link 3", "Link 4", "Link 5", "Link 6", "Link 7", "Link 8", "Link 9", "Link 10", "Link 11", "Link 12", "Link 13"];
+    const headerTitle = document.querySelector(".header-title");
 
     function populateList() {
         ul.innerHTML = '';
         artists.forEach((artist) => {
             const li = document.createElement("li");
-            li.innerHTML = `<a href="${artist.link}">${artist.name}</a>`;
+            li.textContent = artist;
             ul.appendChild(li);
         });
     }
@@ -19,11 +15,10 @@ document.addEventListener("DOMContentLoaded", function() {
     populateList();
 
     setTimeout(() => {
-        const headerTitle = document.querySelector(".header-title");
         headerTitle.style.borderRight = 'none';
     }, 1450);
 
-    VANTA.BIRDS({
+    let vantaEffect = VANTA.BIRDS({
         el: "#my-background",
         backgroundColor: 0x0d0d0d,
         color1: 0xff4c4c,
@@ -44,16 +39,6 @@ document.addEventListener("DOMContentLoaded", function() {
         scale: 1.00,
         scaleMobile: 1.00
     });
-
-    // Check if the user has authenticated
-    const params = new URLSearchParams(window.location.hash.substring(1));
-    const token = params.get('access_token');
-    if (token) {
-        fetchRecentlyPlayedTracks(token).then(tracks => {
-            displayRecentlyPlayed(tracks);
-            modal.style.display = 'block';
-        });
-    }
 });
 
 async function fetchRecentlyPlayedTracks(token) {
@@ -90,6 +75,7 @@ function displayRecentlyPlayed(tracks) {
     });
 }
 
+
 function shareTrack(url, name, artists) {
     if (navigator.share) {
         navigator.share({
@@ -118,7 +104,6 @@ document.getElementById('recently-listened-tab').addEventListener('click', () =>
     }
 });
 
-// Ensure other tabs clear the hash and hide the modal
 document.querySelectorAll('.tab').forEach(tab => {
     tab.addEventListener('click', () => {
         if (tab.id !== 'recently-listened-tab') {
