@@ -67,7 +67,6 @@ function displayRecentlyPlayed(tracks) {
                 <p>${track.artists.map(artist => artist.name).join(', ')}</p>
             </div>
             <div class="track-buttons">
-                <button onclick="shareTrack('${track.external_urls.spotify}', '${track.name}', '${track.artists.map(artist => artist.name).join(', ')}')">Share</button>
                 <a href="${track.external_urls.spotify}" target="_blank">Open in Spotify</a>
             </div>
         `;
@@ -86,9 +85,10 @@ function shareTrack(url, name, artists) {
     }
 }
 
-// Handle modal
-const modal = document.getElementById('modal');
-const span = document.getElementsByClassName('close')[0];
+// Handle modals
+const recentlyListenedModal = document.getElementById('modal');
+const aboutMeModal = document.getElementById('about-me-modal');
+const closeButtons = document.getElementsByClassName('close');
 
 document.getElementById('recently-listened-tab').addEventListener('click', () => {
     const params = new URLSearchParams(window.location.hash.substring(1));
@@ -96,29 +96,40 @@ document.getElementById('recently-listened-tab').addEventListener('click', () =>
     if (token) {
         fetchRecentlyPlayedTracks(token).then(tracks => {
             displayRecentlyPlayed(tracks);
-            modal.style.display = 'block';
+            recentlyListenedModal.style.display = 'block';
         });
     } else {
         authenticate();
     }
 });
 
+document.getElementById('about-me-tab').addEventListener('click', () => {
+    aboutMeModal.style.display = 'block';
+});
+
 document.querySelectorAll('.tab').forEach(tab => {
     tab.addEventListener('click', () => {
-        if (tab.id !== 'recently-listened-tab') {
+        if (tab.id !== 'recently-listened-tab' && tab.id !== 'about-me-tab') {
             window.location.hash = '';
-            modal.style.display = 'none';
+            recentlyListenedModal.style.display = 'none';
+            aboutMeModal.style.display = 'none';
         }
     });
 });
 
-span.onclick = function() {
-    modal.style.display = 'none';
-}
+Array.from(closeButtons).forEach(button => {
+    button.onclick = function() {
+        recentlyListenedModal.style.display = 'none';
+        aboutMeModal.style.display = 'none';
+    }
+});
 
 window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = 'none';
+    if (event.target == recentlyListenedModal) {
+        recentlyListenedModal.style.display = 'none';
+    }
+    if (event.target == aboutMeModal) {
+        aboutMeModal.style.display = 'none';
     }
 }
 

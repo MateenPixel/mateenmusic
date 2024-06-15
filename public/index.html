@@ -10,7 +10,7 @@
     <div class="container">
         <div class="left-section">
             <div class="tabs">
-                <a href="#about" class="tab">About Me</a>
+                <a href="#about" id="about-me-tab" class="tab">About Me</a>
                 <a href="#reviews" class="tab">Reviews</a>
                 <a id="recently-listened-tab" class="tab">Recently Listened</a>
             </div>
@@ -43,12 +43,21 @@
         </nav>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal for Recently Listened -->
     <div id="modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Here is what I have been listening to</h2>
             <div id="recently-listened-tracks"></div>
+        </div>
+    </div>
+
+    <!-- Modal for About Me -->
+    <div id="about-me-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>About Me</h2>
+            <p>This is the About Me section content.</p>
         </div>
     </div>
 
