@@ -42,3 +42,111 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
 });
+
+async function fetchRecentlyPlayedTracks(token) {
+    const apiUrl = 'https://api.spotify.com/v1/me/player/recently-played?limit=5';
+    const response = await fetch(apiUrl, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
+
+    const data = await response.json();
+    return data.items;
+}
+
+function displayRecentlyPlayed(tracks) {
+    const container = document.getElementById('recently-listened-content');
+    container.innerHTML = '';
+    tracks.forEach(item => {
+        const track = item.track;
+        const trackElement = document.createElement('div');
+        trackElement.className = 'track';
+        trackElement.innerHTML = `
+            <img src="${track.album.images[0].url}" alt="${track.name}" />
+            <div>
+                <h3>${track.name}</h3>
+                <p>${track.artists.map(artist => artist.name).join(', ')}</p>
+            </div>
+        `;
+        container.appendChild(trackElement);
+    });
+}
+
+document.getElementById('recently-listened-tab').addEventListener('click', async () => {
+    const params = new URLSearchParams(window.location.hash.substring(1));
+    const token = params.get('access_token');
+    if (token) {
+        const tracks = await fetchRecentlyPlayedTracks(token);
+        displayRecentlyPlayed(tracks);
+    } else {
+        window.location.href = 'https://your-vercel-app.vercel.app/login';
+    }
+});
+
+const clientId = 'b18acce7865b488782b0a404a6848e98';
+const redirectUri = 'https://mateenpixel.github.io/mateenmusic';
+
+// Spotify Implicit Grant Flow
+function authenticate() {
+    const scopes = 'user-read-recently-played';
+    const url = `https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&scope=${encodeURIComponent(scopes)}&redirect_uri=${encodeURIComponent(redirectUri)}`;
+    window.location.href = url;
+}
+
+async function fetchRecentlyPlayedTracks(token) {
+    const apiUrl = 'https://api.spotify.com/v1/me/player/recently-played?limit=5';
+    const response = await fetch(apiUrl, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
+
+    const data = await response.json();
+    return data.items;
+}
+
+function displayRecentlyPlayed(tracks) {
+    const container = document.getElementById('recently-listened-tracks');
+    container.innerHTML = '';
+    tracks.forEach(item => {
+        const track = item.track;
+        const trackElement = document.createElement('div');
+        trackElement.className = 'track';
+        trackElement.innerHTML = `
+            <img src="${track.album.images[0].url}" alt="${track.name}" />
+            <div>
+                <h3>${track.name}</h3>
+                <p>${track.artists.map(artist => artist.name).join(', ')}</p>
+            </div>
+        `;
+        container.appendChild(trackElement);
+    });
+}
+
+// Handle modal
+const modal = document.getElementById('modal');
+const span = document.getElementsByClassName('close')[0];
+
+document.getElementById('recently-listened-tab').addEventListener('click', () => {
+    const params = new URLSearchParams(window.location.hash.substring(1));
+    const token = params.get('access_token');
+    if (token) {
+        fetchRecentlyPlayedTracks(token).then(tracks => {
+            displayRecentlyPlayed(tracks);
+            modal.style.display = 'block';
+        });
+    } else {
+        authenticate();
+    }
+});
+
+span.onclick = function() {
+    modal.style.display = 'none';
+}
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = 'none';
+    }
+}

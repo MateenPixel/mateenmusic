@@ -7,18 +7,20 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="tabs">
-        <a href="#about" class="tab">About Me</a>
-        <a href="#reviews" class="tab">Reviews</a>
-        <a href="#recently-listened" class="tab">Recently Listened</a>
-    </div>
     <div class="container">
-        <div class="main-content" id="my-background">
-            <h1 class="header-title">
-                <span>E</span><span>x</span><span>p</span><span>l</span><span>i</span><span>c</span><span>i</span><span>t</span><span>l</span><span>y</span>
-                <span> </span>
-                <span>Y</span><span>o</span><span>u</span><span>r</span><span>s</span>
-            </h1>
+        <div class="left-section">
+            <div class="tabs">
+                <a href="#about" class="tab">About Me</a>
+                <a href="#reviews" class="tab">Reviews</a>
+                <a id="recently-listened-tab" class="tab">Recently Listened</a>
+            </div>
+            <div class="main-content" id="my-background">
+                <h1 class="header-title">
+                    <span>E</span><span>x</span><span>p</span><span>l</span><span>i</span><span>c</span><span>i</span><span>t</span><span>l</span><span>y</span>
+                    <span> </span>
+                    <span>Y</span><span>o</span><span>u</span><span>r</span><span>s</span>
+                </h1>
+            </div>
         </div>
         <nav>
             <div class="nav-header">Album List</div>
@@ -40,6 +42,16 @@
             <div class="nav-footer">by Mateen</div>
         </nav>
     </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Recently Listened</h2>
+            <div id="recently-listened-tracks"></div>
+        </div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vanta/dist/vanta.birds.min.js"></script>
     <script src="script.js"></script>
