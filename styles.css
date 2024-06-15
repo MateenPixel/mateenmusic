@@ -262,8 +262,8 @@ nav ul li:hover {
 
 .track-buttons {
     display: flex;
-    justify-content: flex-start;
-    margin-top: 10px;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
 .track-buttons button,
@@ -272,14 +272,17 @@ nav ul li:hover {
     color: #fff;
     border: none;
     padding: 8px 12px;
-    margin-right: 10px;
+    margin: 5px 0;
     text-decoration: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background 0.3s ease;
+    width: 150px;
+    text-align: center;
 }
 
 .track-buttons button:hover,
 .track-buttons a:hover {
     background: #1ed760;
 }
+
