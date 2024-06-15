@@ -14,10 +14,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     populateList();
 
-    // Add a delay to remove the cursor after the typing animation
     setTimeout(() => {
         headerTitle.style.borderRight = 'none';
-    }, 1450); // Adjust the delay to match the typing animation duration
+    }, 1450);
 
     let vantaEffect = VANTA.BIRDS({
         el: "#my-background",
@@ -40,7 +39,6 @@ document.addEventListener("DOMContentLoaded", function() {
         scale: 1.00,
         scaleMobile: 1.00
     });
-
 });
 
 async function fetchRecentlyPlayedTracks(token) {
