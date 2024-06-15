@@ -12,7 +12,7 @@ const port = process.env.PORT || 3001; // Change the port for local development
 console.log('CLIENT_ID:', process.env.CLIENT_ID);
 console.log('CLIENT_SECRET:', process.env.CLIENT_SECRET);
 
-const clientId = b18acce7865b488782b0a404a6848e98
+const clientId = process.env.CLIENT_ID;
 const clientSecret = process.env.CLIENT_SECRET;
 const redirectUri = 'https://mateenmusic.vercel.app/callback';
 
