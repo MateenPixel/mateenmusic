@@ -41,20 +41,16 @@ app.get('/callback', (req, res) => {
     };
 
     request.post(authOptions, (error, response, body) => {
-        if (error) {
+        if (error || response.statusCode !== 200) {
             return res.redirect('/#' + querystring.stringify({ error: 'invalid_token' }));
         }
 
-        if (response.statusCode === 200) {
-            const access_token = body.access_token;
-            const refresh_token = body.refresh_token;
-            res.redirect(`https://mateenpixel.github.io/mateenmusic/#${querystring.stringify({
-                access_token: access_token,
-                refresh_token: refresh_token
-            })}`);
-        } else {
-            res.redirect('/#' + querystring.stringify({ error: 'invalid_token' }));
-        }
+        const access_token = body.access_token;
+        const refresh_token = body.refresh_token;
+        res.redirect(`https://mateenpixel.github.io/mateenmusic/#${querystring.stringify({
+            access_token: access_token,
+            refresh_token: refresh_token
+        })}`);
     });
 });
 
