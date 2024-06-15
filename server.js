@@ -8,7 +8,11 @@ const querystring = require('querystring');
 const app = express();
 const port = process.env.PORT || 3001; // Change the port for local development
 
-const clientId = process.env.CLIENT_ID;
+// Log the environment variables
+console.log('CLIENT_ID:', process.env.CLIENT_ID);
+console.log('CLIENT_SECRET:', process.env.CLIENT_SECRET);
+
+const clientId = b18acce7865b488782b0a404a6848e98
 const clientSecret = process.env.CLIENT_SECRET;
 const redirectUri = 'https://mateenmusic.vercel.app/callback';
 
@@ -23,6 +27,7 @@ app.get('/login', (req, res) => {
         scope: scopes,
         redirect_uri: redirectUri
     });
+    console.log('Redirecting to:', url); // Log the redirect URL
     res.redirect(url);
 });
 
