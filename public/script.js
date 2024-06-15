@@ -42,6 +42,23 @@ document.addEventListener("DOMContentLoaded", function() {
         scale: 1.00,
         scaleMobile: 1.00
     });
+
+    // Close modal buttons functionality
+    Array.from(closeButtons).forEach(button => {
+        button.onclick = function() {
+            recentlyListenedModal.style.display = 'none';
+            aboutMeModal.style.display = 'none';
+        }
+    });
+
+    window.onclick = function(event) {
+        if (event.target == recentlyListenedModal) {
+            recentlyListenedModal.style.display = 'none';
+        }
+        if (event.target == aboutMeModal) {
+            aboutMeModal.style.display = 'none';
+        }
+    };
 });
 
 async function fetchRecentlyPlayedTracks(token) {
@@ -78,6 +95,17 @@ function displayRecentlyPlayed(tracks) {
     });
 }
 
+// Ensure vercelUrl is defined before it's used
+const clientId = 'b18acce7865b488782b0a404a6848e98';
+const vercelUrl = 'https://mateenmusic.vercel.app';
+
+function authenticate() {
+    const scopes = 'user-read-recently-played';
+    const url = `${vercelUrl}/login`;
+    console.log('Redirecting to Spotify for authentication:', url);
+    window.location.href = url;
+}
+
 document.getElementById('recently-listened-tab').addEventListener('click', () => {
     console.log('Recently listened tab clicked');
     const params = new URLSearchParams(window.location.hash.substring(1));
@@ -110,29 +138,3 @@ document.querySelectorAll('.tab').forEach(tab => {
         }
     });
 });
-
-Array.from(closeButtons).forEach(button => {
-    button.onclick = function() {
-        recentlyListenedModal.style.display = 'none';
-        aboutMeModal.style.display = 'none';
-    }
-});
-
-window.onclick = function(event) {
-    if (event.target == recentlyListenedModal) {
-        recentlyListenedModal.style.display = 'none';
-    }
-    if (event.target == aboutMeModal) {
-        aboutMeModal.style.display = 'none';
-    }
-}
-
-const clientId = 'b18acce7865b488782b0a404a6848e98';
-const vercelUrl = 'https://mateenmusic.vercel.app';
-
-function authenticate() {
-    const scopes = 'user-read-recently-played';
-    const url = `${vercelUrl}/login`;
-    console.log('Redirecting to Spotify for authentication:', url);
-    window.location.href = url;
-}
