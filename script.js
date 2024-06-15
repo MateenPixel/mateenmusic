@@ -84,7 +84,7 @@ document.getElementById('recently-listened-tab').addEventListener('click', async
     }
 });
 
-const clientId = 'b18acce7865b488782b0a404a6848e98'; // Make sure this is a string
+const clientId = 'b18acce7865b488782b0a404a6848e98'; // Ensure this is your actual client ID
 const redirectUri = 'https://mateenpixel.github.io/mateenmusic/'; // Ensure this matches your GitHub Pages URL
 const vercelUrl = 'https://mateenmusic.vercel.app/'; // Ensure this is your actual Vercel app URL
 
