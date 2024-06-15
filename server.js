@@ -36,7 +36,7 @@ app.get('/callback', (req, res) => {
             grant_type: 'authorization_code'
         },
         headers: {
-            'Authorization': 'Basic ' + (new Buffer(clientId + ':' + clientSecret).toString('base64'))
+            'Authorization': 'Basic ' + (Buffer.from(clientId + ':' + clientSecret).toString('base64'))
         },
         json: true
     };
@@ -59,7 +59,7 @@ app.get('/callback', (req, res) => {
     });
 });
 
-// Serve static files and handle all other routes
+// Handle all other routes
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });

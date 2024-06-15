@@ -39,7 +39,6 @@ document.addEventListener("DOMContentLoaded", function() {
         scale: 1.00,
         scaleMobile: 1.00
     });
-    
 });
 
 async function fetchRecentlyPlayedTracks(token) {
@@ -75,7 +74,6 @@ function displayRecentlyPlayed(tracks) {
         container.appendChild(trackElement);
     });
 }
-
 
 function shareTrack(url, name, artists) {
     if (navigator.share) {
