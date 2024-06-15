@@ -1,15 +1,21 @@
-require('dotenv').config();
+require('dotenv').config(); // Load environment variables from .env file
+
 const path = require('path');
 const express = require('express');
 const request = require('request');
 const cors = require('cors');
 const querystring = require('querystring');
 const app = express();
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3001; // Change the port for local development
 
-const clientId = process.env.CLIENT_ID;
-const clientSecret = process.env.CLIENT_SECRET;
-const redirectUri = 'https://mateenmusic.vercel.app/callback'; // Ensure this points to Vercel
+// Log the environment variables
+console.log('CLIENT_ID:', process.env.CLIENT_ID);
+console.log('CLIENT_SECRET:', process.env.CLIENT_SECRET);
+
+const clientId = 'b18acce7865b488782b0a404a6848e98'; // Hardcoded for debugging
+const clientSecret = process.env.CLIENT_SECRET; // Still use environment variable for client secret
+const redirectUri = 'https://mateenmusic.vercel.app/callback';
+
 
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -22,6 +28,7 @@ app.get('/login', (req, res) => {
         scope: scopes,
         redirect_uri: redirectUri
     });
+    console.log('Redirecting to:', url); // Log the redirect URL
     res.redirect(url);
 });
 
@@ -41,19 +48,24 @@ app.get('/callback', (req, res) => {
     };
 
     request.post(authOptions, (error, response, body) => {
-        if (error || response.statusCode !== 200) {
+        if (error) {
             return res.redirect('/#' + querystring.stringify({ error: 'invalid_token' }));
         }
 
-        const access_token = body.access_token;
-        const refresh_token = body.refresh_token;
-        res.redirect(`https://mateenpixel.github.io/mateenmusic/#${querystring.stringify({
-            access_token: access_token,
-            refresh_token: refresh_token
-        })}`);
+        if (response.statusCode === 200) {
+            const access_token = body.access_token;
+            const refresh_token = body.refresh_token;
+            res.redirect(`/#${querystring.stringify({
+                access_token: access_token,
+                refresh_token: refresh_token
+            })}`);
+        } else {
+            res.redirect('/#' + querystring.stringify({ error: 'invalid_token' }));
+        }
     });
 });
 
+// Handle all other routes
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
