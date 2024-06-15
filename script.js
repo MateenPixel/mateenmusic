@@ -85,8 +85,8 @@ document.getElementById('recently-listened-tab').addEventListener('click', async
 });
 
 const clientId = 'b18acce7865b488782b0a404a6848e98'; // Make sure this is a string
-const redirectUri = 'https://mateenpixel.github.io/mateenmusic';
-const vercelUrl = 'https://mateenmusic.vercel.app/'; // Your Vercel app URL
+const redirectUri = 'https://mateenpixel.github.io/mateenmusic/'; // Ensure this matches your GitHub Pages URL
+const vercelUrl = 'https://mateenmusic.vercel.app/'; // Ensure this is your actual Vercel app URL
 
 // Spotify Implicit Grant Flow
 function authenticate() {
