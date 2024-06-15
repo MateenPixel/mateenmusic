@@ -56,58 +56,6 @@ async function fetchRecentlyPlayedTracks(token) {
 }
 
 function displayRecentlyPlayed(tracks) {
-    const container = document.getElementById('recently-listened-content');
-    container.innerHTML = '';
-    tracks.forEach(item => {
-        const track = item.track;
-        const trackElement = document.createElement('div');
-        trackElement.className = 'track';
-        trackElement.innerHTML = `
-            <img src="${track.album.images[0].url}" alt="${track.name}" />
-            <div>
-                <h3>${track.name}</h3>
-                <p>${track.artists.map(artist => artist.name).join(', ')}</p>
-            </div>
-        `;
-        container.appendChild(trackElement);
-    });
-}
-
-document.getElementById('recently-listened-tab').addEventListener('click', async () => {
-    const params = new URLSearchParams(window.location.hash.substring(1));
-    const token = params.get('access_token');
-    if (token) {
-        const tracks = await fetchRecentlyPlayedTracks(token);
-        displayRecentlyPlayed(tracks);
-    } else {
-        window.location.href = 'https://your-vercel-app.vercel.app/login';
-    }
-});
-
-const clientId = 'b18acce7865b488782b0a404a6848e98'; // Make sure this is a string
-const redirectUri = 'https://mateenpixel.github.io/mateenmusic';
-const vercelUrl = 'https://mateenmusic.vercel.app/'; // Your Vercel app URL
-
-// Spotify Implicit Grant Flow
-function authenticate() {
-    const scopes = 'user-read-recently-played';
-    const url = `${vercelUrl}/login`;
-    window.location.href = url;
-}
-
-async function fetchRecentlyPlayedTracks(token) {
-    const apiUrl = 'https://api.spotify.com/v1/me/player/recently-played?limit=5';
-    const response = await fetch(apiUrl, {
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    });
-
-    const data = await response.json();
-    return data.items;
-}
-
-function displayRecentlyPlayed(tracks) {
     const container = document.getElementById('recently-listened-tracks');
     container.innerHTML = '';
     tracks.forEach(item => {
@@ -120,9 +68,24 @@ function displayRecentlyPlayed(tracks) {
                 <h3>${track.name}</h3>
                 <p>${track.artists.map(artist => artist.name).join(', ')}</p>
             </div>
+            <div class="track-buttons">
+                <button onclick="shareTrack('${track.external_urls.spotify}', '${track.name}', '${track.artists.map(artist => artist.name).join(', ')}')">Share</button>
+                <a href="${track.external_urls.spotify}" target="_blank">Open in Spotify</a>
+            </div>
         `;
         container.appendChild(trackElement);
     });
+}
+
+function shareTrack(url, name, artists) {
+    if (navigator.share) {
+        navigator.share({
+            title: `Check out ${name} by ${artists}`,
+            url: url
+        }).catch(console.error);
+    } else {
+        alert('Sharing not supported in this browser. Here is the link: ' + url);
+    }
 }
 
 // Handle modal
@@ -142,7 +105,6 @@ document.getElementById('recently-listened-tab').addEventListener('click', () =>
     }
 });
 
-// Ensure other tabs clear the hash and hide the modal
 document.querySelectorAll('.tab').forEach(tab => {
     tab.addEventListener('click', () => {
         if (tab.id !== 'recently-listened-tab') {
@@ -161,3 +123,14 @@ window.onclick = function(event) {
         modal.style.display = 'none';
     }
 }
+
+const clientId = 'b18acce7865b488782b0a404a6848e98'; // Make sure this is a string
+const redirectUri = 'https://mateenpixel.github.io/mateenmusic/';
+const vercelUrl = 'https://mateenmusic.vercel.app/';
+
+function authenticate() {
+    const scopes = 'user-read-recently-played';
+    const url = `${vercelUrl}/login`;
+    window.location.href = url;
+}
+

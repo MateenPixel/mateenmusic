@@ -1,3 +1,5 @@
+require('dotenv').config(); // Load environment variables from .env file
+
 const express = require('express');
 const request = require('request');
 const cors = require('cors');
@@ -7,7 +9,7 @@ const port = process.env.PORT || 8888;
 
 const clientId = process.env.CLIENT_ID;
 const clientSecret = process.env.CLIENT_SECRET;
-const redirectUri = 'https://mateenpixel.github.io/mateenmusic';
+const redirectUri = 'https://mateenpixel.github.io/mateenmusic/';
 
 app.use(cors());
 
@@ -58,3 +60,5 @@ app.get('/callback', (req, res) => {
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
+
+module.exports = app;
